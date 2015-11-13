@@ -36,13 +36,11 @@ void loop(void)
   {
     digitalWrite(13, LOW);
     lastTempRequest = millis(); 
-    int32_t temperature = sensors.getTemp(tempDeviceAddress);
-//    temperature = sensors.getTempC(tempDeviceAddress);
-  // immediately after fetching the temperature we request a new sample 
-	// in the async modus
-  // for the demo we let the resolution change to show differences
-    sensors.requestTemperatures(); 
+    int32_t temperature = sensors.getTemp(tempDeviceAddress); //~13ms
+//    float  temperature = sensors.getTempC(tempDeviceAddress);
+
     Serial.println(millis() - lastTempRequest); 
+    sensors.requestTemperatures(); //~2ms
     lastTempRequest = millis(); 
     Serial.print(" Temperature: ");
     Serial.println((temperature*1000)/12800); 
