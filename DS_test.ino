@@ -15,11 +15,12 @@ void setup(void)
   Serial.begin(115200);
   sensors.begin();
   
-//  if (!getAddress(tempDeviceAddress, 0))
-//  {
-//    Serial.print("Disconnect");
-//  }
-  sensors.getAddress(tempDeviceAddress, 0);
+  if (!sensors.getAddress(tempDeviceAddress, 0))
+  {
+    Serial.print("No sensor");
+    while (1); 
+  }
+  //sensors.getAddress(tempDeviceAddress, 0);
 
   sensors.setResolution(tempDeviceAddress, T_RESOL);
   sensors.setWaitForConversion(false);
